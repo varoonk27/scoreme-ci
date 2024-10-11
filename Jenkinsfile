@@ -6,15 +6,15 @@ pipeline {
     }
     
     environment {
-        SONARQUBE_SERVER = 'SonarQubeServer' // Define your SonarQube server name from Jenkins settings
+        SONARQUBE_SERVER = 'SonarQubeServer' 
         JACOCO_REPORT_PATH = '**/target/site/jacoco/jacoco.xml'
         LIZARD_REPORT_PATH = 'lizard-report.txt'
         OWASP_REPORT_PATH = 'dependency-check-report.html'
-        BRANCH_NAME = 'main' // Set the branch name to trigger the pipeline
+        BRANCH_NAME = 'main' 
     }
 
     triggers {
-        pollSCM('H/5 * * * *') // Polling for changes every 5 minutes (can be adjusted)
+        pollSCM('H/5 * * * *') 
     }
 
     stages {
@@ -31,7 +31,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    // Run Maven build command
+                    
                     sh 'mvn clean install'
                 }
             }
@@ -142,7 +142,7 @@ pipeline {
 
     post {
         always {
-            junit '**/target/surefire-reports/*.xml' // Publish test results
+            junit '**/target/surefire-reports/*.xml' 
            archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
             cleanWs() // Clean up workspace after the build
         }
