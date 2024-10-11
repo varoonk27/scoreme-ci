@@ -160,7 +160,7 @@ pipeline {
                       recipientProviders: [[$class: 'DevelopersRecipientProvider']]
          }
     }
-)
+}
    
 
 
