@@ -152,10 +152,12 @@ pipeline {
              //emailext subject: 'Build Successful: ${JOB_NAME} #${BUILD_NUMBER}',
              //         body: 'Good news! The build succeeded! Check the details at ${BUILD_URL}',
              //         recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+            emailext(
             to: 'varoonk208@gmail.com', // Add recipient email address
             subject: 'Build Successful: ${JOB_NAME} #${BUILD_NUMBER}',
             body: 'Good news! The build succeeded! Check the details at ${BUILD_URL}',
             recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+            )    
          }
 
          failure {
