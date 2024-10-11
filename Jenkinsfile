@@ -140,51 +140,28 @@ pipeline {
 
     }
 
-    //post {
-    //    always {
-    //        junit '**/target/surefire-reports/*.xml' // Publish test results
-    //       archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
-    //        cleanWs() // Clean up workspace after the build
-    //    }
+    post {
+        always {
+            junit '**/target/surefire-reports/*.xml' // Publish test results
+           archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
+            cleanWs() // Clean up workspace after the build
+        }
 
         
-    //    success {
-    //         emailext subject: 'Build Successful: ${JOB_NAME} #${BUILD_NUMBER}',
-    //                  body: 'Good news! The build succeeded! Check the details at ${BUILD_URL}',
-    //                  recipientProviders: [[$class: 'DevelopersRecipientProvider']]
-    //     }
-
-    //     failure {
-    //         emailext subject: 'Build Failed: ${JOB_NAME} #${BUILD_NUMBER}',
-    //                  body: 'Unfortunately, the build failed. Check the details at ${BUILD_URL}',
-    //                  recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+        success {
+             emailext subject: 'Build Successful: ${JOB_NAME} #${BUILD_NUMBER}',
+                      body: 'Good news! The build succeeded! Check the details at ${BUILD_URL}',
+                      recipientProviders: [[$class: 'DevelopersRecipientProvider']]
          }
-    //}
 
-    post { 
-    always {
-        junit '**/target/surefire-reports/*.xml' // Publish test results
-        archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
-        cleanWs() // Clean up workspace after the build
+         failure {
+            emailext subject: 'Build Failed: ${JOB_NAME} #${BUILD_NUMBER}',
+                      body: 'Unfortunately, the build failed. Check the details at ${BUILD_URL}',
+                      recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+         }
     }
+)
+   
 
-    success {
-        emailext(
-            to: 'varoonk208@gmail.com', // Add recipient email address
-            subject: 'Build Successful: ${JOB_NAME} #${BUILD_NUMBER}',
-            body: 'Good news! The build succeeded! Check the details at ${BUILD_URL}',
-            recipientProviders: [[$class: 'DevelopersRecipientProvider']]
-        )
-    }
-
-    failure {
-        emailext(
-            to: 'varoonk208@gmail.com', // Add recipient email address
-            subject: 'Build Failed: ${JOB_NAME} #${BUILD_NUMBER}',
-            body: 'Unfortunately, the build failed. Check the details at ${BUILD_URL}',
-            recipientProviders: [[$class: 'DevelopersRecipientProvider']]
-        )
-    }
-}
 
 
