@@ -165,7 +165,8 @@ pipeline {
             to: 'varoonk208@gmail.com', subject: 'Build Failed: ${JOB_NAME} #${BUILD_NUMBER}',
                       body: 'Unfortunately, the build failed. Check the details at ${BUILD_URL}',
                       recipientProviders: [[$class: 'DevelopersRecipientProvider']]
-         }
+            )
+        }
     }
 }
    
