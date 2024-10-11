@@ -153,7 +153,7 @@ pipeline {
              //         body: 'Good news! The build succeeded! Check the details at ${BUILD_URL}',
              //         recipientProviders: [[$class: 'DevelopersRecipientProvider']]
             emailext(
-            to: 'varoonk208@gmail.com', // Add recipient email address
+            to: 'varoonk208@gmail.com', 
             subject: 'Build Successful: ${JOB_NAME} #${BUILD_NUMBER}',
             body: 'Good news! The build succeeded! Check the details at ${BUILD_URL}',
             recipientProviders: [[$class: 'DevelopersRecipientProvider']]
@@ -161,7 +161,8 @@ pipeline {
          }
 
          failure {
-            emailext subject: 'Build Failed: ${JOB_NAME} #${BUILD_NUMBER}',
+            emailext(
+            to: 'varoonk208@gmail.com', subject: 'Build Failed: ${JOB_NAME} #${BUILD_NUMBER}',
                       body: 'Unfortunately, the build failed. Check the details at ${BUILD_URL}',
                       recipientProviders: [[$class: 'DevelopersRecipientProvider']]
          }
